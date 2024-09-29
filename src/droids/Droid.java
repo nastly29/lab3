@@ -25,10 +25,6 @@ public class Droid {
         return health;
     }
 
-    public void setHealth(int health){
-        this.health = health;
-    }
-
     public int getDamage() {
         return damage;
     }
@@ -37,31 +33,32 @@ public class Droid {
         return maxHealth;
     }
 
+    public void setHealth(int health){ this.health = health; }
+
     public String toString(){
         return "*** Дроїд: " + getName() + " *** Здоров'я: " + health + "| Пошкодження: " + damage;
     }
 
+
     public List<String> attack(Droid droid){
         List<String> log = new ArrayList<>();
-        String text1 = this.getName() + " аткакує " + droid.getName() + " на " + damage + " одиниць шкоди.";
-        System.out.println(text1);
-        String text2 = droid.getDamaged(damage);
-        log.add(text1);
-        log.add(text2);
+        String attackMessage = this.getName() + " аткакує " + droid.getName() + " на " + damage + " одиниць шкоди.";
+        System.out.println(attackMessage);
+        String damageLog = droid.getDamaged(damage);
+        log.add(attackMessage);
+        log.add(damageLog);
         return log;
     }
 
     public String getDamaged(int damage){
         health -= damage;
-        String text1 = this.getName() + " отримав " + damage + " одиниць шкоди. Здоров'я: "+ health + "\n";
-        System.out.println(text1);
+        String damageLog = this.getName() + " отримав " + damage + " одиниць шкоди. Здоров'я: "+ health + "\n";
+        System.out.println(damageLog);
         if(health <= 0) {
             String text2 = this.getName() + " знищено!\n";
             System.out.println(Console.RED + text2 + Console.RESET);
             return text2;
         }
-        return text1;
+        return damageLog;
     }
-
-
 }

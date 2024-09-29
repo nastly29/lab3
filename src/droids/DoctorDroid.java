@@ -29,7 +29,6 @@ public class DoctorDroid extends Droid {
         return successMessage;
     }
 
-    // Логування повідомлень про помилки
     private String logFailure(String reason) {
         String failureMessage = "Не вдалося відновити здоров'я: " + reason + "\n";
         System.out.println(Console.RED + failureMessage + Console.RESET);

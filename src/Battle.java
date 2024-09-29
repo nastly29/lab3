@@ -13,13 +13,18 @@ public class Battle {
 
         while (droid1.getHealth() > 0 && droid2.getHealth() > 0) {
             performAttack(droid1, droid2);
-            if (droid2.getHealth() > 0) {
-                performAttack(droid2, droid1);
+            if (droid2.getHealth() <= 0) {
+                deadDroids.add(droid2);
+                break;
+            }
+            performAttack(droid2, droid1);
+            if (droid1.getHealth() <= 0) {
+                deadDroids.add(droid1);
+                break;
             }
         }
-
-        result = determineWinner(droid1, droid2);
-        attackLog.add(result);
+        result = droid1.getHealth() <= 0 ? droid2.getName() + " виграв бій!" : droid1.getName() + " виграв бій!";
+        logResult(result);
         return deadDroids;
     }
 
@@ -74,14 +79,6 @@ public class Battle {
         }
     }
 
-    private String determineWinner(Droid droid1, Droid droid2) {
-        if (droid1.getHealth() <= 0) {
-            return droid2.getName() + " виграв бій!";
-        } else {
-            return droid1.getName() + " виграв бій!";
-        }
-    }
-
     private void logResult(String result) {
         System.out.println(Console.GREEN + result + Console.RESET);
         attackLog.add(result);
@@ -91,7 +88,6 @@ public class Battle {
         return team.get(random.nextInt(team.size()));
     }
 
-    // Method to get the attack log
     public List<String> getAttackLog() {
         return attackLog;
     }

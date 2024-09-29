@@ -14,6 +14,17 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
     static List<String> battleLog = new ArrayList<>();
 
+    static {
+        droids.add(new DoctorDroid("MediBot"));
+        droids.add(new DoctorDroid("Healix"));
+        droids.add(new DoctorDroid("Docron"));
+        droids.add(new DoctorDroid("Cureton"));
+        droids.add(new FireDroid("Flare"));
+        droids.add(new FireDroid("Blazex"));
+        droids.add(new FireDroid("Ember"));
+        droids.add(new FireDroid("Inferno"));
+    }
+
     //Меню
     public static void main(String[] args) {
         while (true) {
@@ -123,6 +134,7 @@ public class Main {
         Droid droid1 = droids.get(index1);
         Droid droid2 = droids.get(index2);
 
+        System.out.println(Console.GREEN+"\nБій розпочинається!\n"+Console.RESET);
         Battle battle = new Battle();
         List<Droid> deadDroids = battle.oneVSone(droid1, droid2);
 
@@ -239,7 +251,7 @@ public class Main {
             }
             System.out.println(Console.GREEN + "Бій успішно збережено у файл: " + filename + Console.RESET);
         } catch (IOException e) {
-            System.out.println(Console.RED + "Сталася помилка при збереженні файлу: " + e.getMessage() + Console.RESET);
+            System.out.println(Console.RED + "Сталася помилка при збереженні файлу!" + Console.RESET);
         }
     }
 
@@ -254,7 +266,7 @@ public class Main {
                 System.out.println(line);
             }
         } catch (IOException e) {
-            System.out.println("Помилка при зчитуванні файлу: " + e.getMessage());
+            System.out.println(Console.RED + "Помилка при зчитуванні вмісту файлу!" + Console.RESET);
         }
     }
 }
