@@ -1,6 +1,6 @@
 package droids;
 
-public class FireDroid extends droids.Droid {
+public class FireDroid extends Droid {
     private int fireDamage;
 
     public FireDroid(String name){

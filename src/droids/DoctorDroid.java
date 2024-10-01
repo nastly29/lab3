@@ -8,7 +8,7 @@ public class DoctorDroid extends Droid {
         this.countRepair = 30;
     }
 
-    // Метод для ремонту іншого дроїда
+    // Метод для відновлення іншого дроїда
     public String repair(Droid droid) {
         if (droid == null) {
             return logFailure("Невідомий дроїд");
