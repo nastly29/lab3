@@ -1,9 +1,12 @@
 import droids.DoctorDroid;
 import droids.Droid;
 import java.util.*;
-import colors.Console;
 
 public class Battle {
+    public static final String RESET = "\033[0m";
+    public static final String GREEN = "\033[0;32m";
+    public static final String YELLOW = "\033[0;33m";
+
     private final Random random = new Random();
     private final List<String> attackLog = new ArrayList<>();
 
@@ -23,7 +26,11 @@ public class Battle {
                 break;
             }
         }
-        result = droid1.getHealth() <= 0 ? droid2.getName() + " виграв бій!" : droid1.getName() + " виграв бій!";
+        if (droid1.getHealth() <= 0) {
+            result = YELLOW + droid2.getName() + RESET + " виграв бій!\uD83E\uDD47";
+        } else {
+            result = YELLOW + droid1.getName() + RESET + " виграв бій!\uD83E\uDD47";
+        }
         logResult(result);
         return deadDroids;
     }
@@ -56,15 +63,18 @@ public class Battle {
             performRepairs(team1);
             performRepairs(team2);
         }
-
-        result = team1.isEmpty() ? "\nВиграла команда №2!" : "\nВиграла команда №1!";
+        if (team1.isEmpty()) {
+            result = "\nВиграла команда №2!\uD83E\uDD47";
+        } else {
+            result = "\nВиграла команда №1!\uD83E\uDD47";
+        }
         logResult(result);
         return deadDroids;
     }
 
     private void performAttack(Droid attacker, Droid defender) {
-        List<String> attackDetails = attacker.attack(defender);
-        attackLog.addAll(attackDetails);
+        String attackDetails = attacker.attack(defender);
+        attackLog.add(attackDetails);
     }
 
     private void performRepairs(List<Droid> team) {
@@ -80,7 +90,7 @@ public class Battle {
     }
 
     private void logResult(String result) {
-        System.out.println(Console.GREEN + result + Console.RESET);
+        System.out.println(GREEN + result + RESET);
         attackLog.add(result);
     }
 

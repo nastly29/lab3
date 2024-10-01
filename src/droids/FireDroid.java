@@ -1,8 +1,5 @@
 package droids;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FireDroid extends droids.Droid {
     private int fireDamage;
 
@@ -15,15 +12,11 @@ public class FireDroid extends droids.Droid {
         return super.toString() +  "| Вогняні удари: " + fireDamage;
     }
 
-    public List<String> attack(Droid droid) {
-        List<String> log = new ArrayList<>();
+    public String attack(Droid droid) {
         int totalDamage = calculateDamage();
         String attackMessage = formatAttackMessage(droid, totalDamage);
         String damageLog = droid.getDamaged(totalDamage);
-
-        log.add(attackMessage);
-        log.add(damageLog);
-        return log;
+        return  attackMessage + "\n" + damageLog;
     }
 
     // Метод для розрахунку загальної шкоди
@@ -39,7 +32,8 @@ public class FireDroid extends droids.Droid {
     // Формування повідомлення про атаку
     private String formatAttackMessage(Droid targetDroid, int totalDamage) {
         String attackType = (fireDamage > 0) ? "потужний вогняний удар" : "звичайний удар";
-        String message = this.getName() + " завдав " + attackType + " " + targetDroid.getName() + " на " + totalDamage + " одиниць шкоди.";
+        String message = YELLOW+this.getName() +RESET+ " завдав " + attackType + " " + YELLOW+ targetDroid.getName()
+                +RESET+ " на " + totalDamage + " одиниць шкоди.";
         System.out.println(message);
         return message;
     }

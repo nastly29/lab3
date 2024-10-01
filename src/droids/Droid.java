@@ -1,10 +1,10 @@
 package droids;
-import colors.Console;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Droid {
+    public static final String RESET = "\033[0m";
+    public static final String RED = "\033[0;31m";
+    public static final String YELLOW = "\033[0;33m";
+
     public String name;
     public int health;
     public int damage;
@@ -17,9 +17,7 @@ public class Droid {
         this.maxHealth = health;
     }
 
-    public String getName() {
-        return Console.YELLOW + name + Console.RESET;
-    }
+    public String getName() { return name;}
 
     public int getHealth() {
         return health;
@@ -36,28 +34,26 @@ public class Droid {
     public void setHealth(int health){ this.health = health; }
 
     public String toString(){
-        return "*** Дроїд: " + getName() + " *** Здоров'я: " + health + "| Пошкодження: " + damage;
+        return "*** Дроїд: " + YELLOW + getName() + RESET + " *** Здоров'я: " + health + "| Пошкодження: " + damage;
     }
 
 
-    public List<String> attack(Droid droid){
-        List<String> log = new ArrayList<>();
-        String attackMessage = this.getName() + " аткакує " + droid.getName() + " на " + damage + " одиниць шкоди.";
+    public String attack(Droid droid){
+        String attackMessage = YELLOW+this.getName() +RESET+ " аткакує " + YELLOW+droid.getName()
+                +RESET+ " на " + damage + " одиниць шкоди.";
         System.out.println(attackMessage);
         String damageLog = droid.getDamaged(damage);
-        log.add(attackMessage);
-        log.add(damageLog);
-        return log;
+        return attackMessage + "\n" + damageLog;
     }
 
     public String getDamaged(int damage){
         health -= damage;
-        String damageLog = this.getName() + " отримав " + damage + " одиниць шкоди. Здоров'я: "+ health + "\n";
+        String damageLog = YELLOW + this.getName() + RESET + " отримав " + damage + " одиниць шкоди. Здоров'я: "+ health + "\n";
         System.out.println(damageLog);
         if(health <= 0) {
-            String text2 = this.getName() + " знищено!\n";
-            System.out.println(Console.RED + text2 + Console.RESET);
-            return text2;
+            String text = YELLOW  + this.getName() + RESET + " знищено!\uD83D\uDE35\n";
+            System.out.println(RED + text + RESET);
+            return text;
         }
         return damageLog;
     }

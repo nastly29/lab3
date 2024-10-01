@@ -1,7 +1,5 @@
 package droids;
 
-import colors.Console;
-
 public class DoctorDroid extends Droid {
     private final int countRepair;
 
@@ -23,7 +21,7 @@ public class DoctorDroid extends Droid {
         int newHealth = Math.min(droid.getHealth() + countRepair, droid.getMaxHealth());
         droid.setHealth(newHealth);
 
-        String successMessage = this.getName() + " збільшив здоров'я для " + droid.getName() +
+        String successMessage = YELLOW+this.getName() +RESET+ " збільшив здоров'я для " + YELLOW+droid.getName() +RESET+
                 " на " + countRepair + " одиниць. Нове здоров'я: " + newHealth + "\n";
         System.out.println(successMessage);
         return successMessage;
@@ -31,7 +29,7 @@ public class DoctorDroid extends Droid {
 
     private String logFailure(String reason) {
         String failureMessage = "Не вдалося відновити здоров'я: " + reason + "\n";
-        System.out.println(Console.RED + failureMessage + Console.RESET);
+        System.out.println(RED + failureMessage + RESET);
         return failureMessage;
     }
 
