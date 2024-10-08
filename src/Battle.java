@@ -88,7 +88,7 @@ public class Battle {
         for (Droid droid : team) {
             if (droid.isDoctorDroid) {
                 Droid teammate = selectRandomDroid(team);
-                if (teammate != droid && teammate.getHealth() > 0) {
+                if (teammate != droid && teammate.isAlive()) {
                     String repairLog = repair((DoctorDroid) droid, teammate);
                     attackLog.add(repairLog);
                 }
@@ -144,7 +144,7 @@ public class Battle {
             return logFailure("Невідомий дроїд");
         }
 
-        if (droid.getHealth() <= 0) {
+        if (!droid.isAlive()) {
             return logFailure(droid.getName() + " мертвий і не може бути відновлений");
         }
 

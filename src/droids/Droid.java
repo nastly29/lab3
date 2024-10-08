@@ -6,7 +6,6 @@ public class Droid {
     public int health;
     public int damage;
     public final int maxHealth;
-
     public boolean isFireDroid = false;
     public boolean isDoctorDroid = false;
 
